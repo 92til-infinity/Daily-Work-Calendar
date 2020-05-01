@@ -1,97 +1,58 @@
-// i comment out 
+// global variables
+
 
 // Create a new list item when clicking on the "Add" button
 function newTodoItem() {
   var li = document.createElement("li");
   var inputValue = document.getElementById("myInput").value;
+  var inputDate = document.getElementById("myDate").value;
+  var $inputDate = inputDate.split("-")[2];
+  console.log(inputDate.split("-")[2]);
+
+  // var inputDate = document.getElementById("myDate").value;
+  $(li).attr("date", $inputDate);
   var t = document.createTextNode(inputValue);
+  // t.appendChild(inputDate);
   li.appendChild(t);
   if (inputValue === '') {
     alert("You must write something!");
-  } else {
+  }
+  else if (inputDate === '') {
+    alert("You must pick a date!");
+  }
+  else {
     console.log(document.getElementsByClassName(("todoItem")[0]));
     document.getElementsByClassName("todoItem")[0].appendChild(li);
     // append to active day
+    // need to compare the timestamp it has to the current day, still working local storage.
   }
-
-  // document.getElementById("myInput").value = "";
-
-  // var span = document.createElement("SPAN");
-  // var txt = document.createTextNode("\u00D7");
-  // span.className = "close";
-  // span.appendChild(txt);
-  // li.appendChild(span);
-
-  // for (i = 0; i < close.length; i++) {
-  //   close[i].onclick = function () {
-  //     var div = this.parentElement;
-  //     div.style.display = "none";
-  //   }
-  // }
-}
-
-
-
-
-// Create a "close" button and append it to each list item
-// var closeButton = document.getElementsByClassName("todoItem");
-
-// for (var i = 0; i < closeButton.length; i++) {
-//   var span = document.createElement("SPAN");
-//   var txt = document.createTextNode("\u00D7");
-//   span.className = "close";
-//   span.appendChild(txt);
-//   closeButton[i].appendChild(span);
-// }
-
-//Click on a close button to hide the current list item
-// var close = document.getElementsByClassName("close");
-
-// for (var i = 0; i < close.length; i++) {
-
-//   close[i].onclick = function () {
-//     var div = this.parentElement;
-//     div.style.display = "none";
-//   }
-// }
-
-// Add a "checked" symbol when clicking on a list item
-// var list = document.querySelector('ul');
-// list.addEventListener('click', function (ev) {
-//   if (ev.target.tagName === 'LI') {
-//     ev.target.classList.toggle('checked');
-//   }
-// }, false);
-
-// filter functions below
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-function filterFunction() {
-  var input, filter, ul, li, a, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  div = document.getElementById("myDropdown");
-  a = div.getElementsByTagName("a");
-  for (i = 0; i < a.length; i++) {
-    txtValue = a[i].textContent || a[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      a[i].style.display = "";
-    } else {
-      a[i].style.display = "none";
+  // ------------------------
+  function whatDay() {
+    if ($inputDate === dateOutput) {
+      console.log("worked")
+      // change the text background to green for future
+      // change text bckground to red for past
+      // 
     }
   }
 }
 
+var currentDate = moment().format("MMM Do YY");
+var dateOutput = currentDate.split(" ")[1].split("th")[0];
+
+
+
 function todaysDate() {
-  var currentDate = moment().format("MMM Do YY");
+
   $(".today").text(currentDate);
   // console.log(currentDate);
   // console.log(currentDate.split(" ")[1].split("th")[0]);
-  var dateOutput = currentDate.split(" ")[1].split("th")[0];
+  // var dateOutput = currentDate.split(" ")[1].split("th")[0];
   // console.log(typeof dateOutput);
   return dateOutput;
+
+
+
 }
 todaysDate();
 
@@ -105,20 +66,10 @@ $(".date").each(function () {
 
 });
 
+// function whatDay() {
+//   if ($inputDate === dateOutput) {
+//     console.log("worked")
+//   }
 
-// if state showing if appended list item is past present future it gets the proper color
-// function timeStamp() {
-//   if (newTodoItem.moment() != (moment().format("MMM Do YY"))) {
-//     // mark red for past
-//   }
-//   else if (newTodoItem.moment() === (moment().format("MMM Do YY"))) {
-//     // mark light blue for present
-//   }
-//   else if (newTodoItem.moment() > (moment().format("MMM Do YY"))) {
-//     // mark green for future
-//   }
-//   else {
-//     alert("null");
-//     console.log("null");
-//   }
 // }
+// whatDay();
